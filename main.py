@@ -1,11 +1,14 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+import os
+TOKEN = os.getenv("BOT_TOKEN")
 
 # Вставь сюда токен от BotFather
-TOKEN = "8449212884:AAEp-8TFw_tYj8xXL1ecVLrqlyWdSODeIF4"
+#TOKEN = "8449212884:AAEp-8TFw_tYj8xXL1ecVLrqlyWdSODeIF4"
 
 # Простое хранилище заметок (в памяти)
 notes = {}
+
 
 # Команда /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -14,6 +17,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                     "Команды:\n"
                                     "/notes – показать все заметки\n"
                                     "/clear – удалить все заметки")
+
 
 # Добавление заметки
 async def add_note(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -26,6 +30,7 @@ async def add_note(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text(f"✅ Заметка сохранена: {text}")
 
+
 # Показать все заметки
 async def show_notes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.message.from_user.id
@@ -34,14 +39,16 @@ async def show_notes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not user_notes:
         await update.message.reply_text("У тебя пока нет заметок.")
     else:
-        result = "\n".join([f"{i+1}. {n}" for i, n in enumerate(user_notes)])
+        result = "\n".join([f"{i + 1}. {n}" for i, n in enumerate(user_notes)])
         await update.message.reply_text(f"📒 Твои заметки:\n{result}")
+
 
 # Очистить все заметки
 async def clear_notes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.message.from_user.id
     notes[user_id] = []
     await update.message.reply_text("🗑 Все заметки удалены.")
+
 
 def main():
     app = Application.builder().token(TOKEN).build()
@@ -52,6 +59,7 @@ def main():
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, add_note))
 
     app.run_polling()
+
 
 if __name__ == "__main__":
     main()
