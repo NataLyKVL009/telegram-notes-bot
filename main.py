@@ -1,4 +1,4 @@
-from telegram import Update
+from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 import os
 TOKEN = os.getenv("BOT_TOKEN")
@@ -9,14 +9,8 @@ TOKEN = os.getenv("BOT_TOKEN")
 # ⚡️ вставь сюда свой admin_id (узнаешь через /myid)
 ADMIN_ID = 123456789
 
-from telegram import Update, ReplyKeyboardMarkup
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
-
 # ⚡️ вставь сюда свой токен
 TOKEN = "YOUR_BOT_TOKEN"
-
-# ⚡️ вставь сюда свой admin_id
-ADMIN_ID = 123456789
 
 feedbacks = []
 
