@@ -9,9 +9,6 @@ TOKEN = os.getenv("BOT_TOKEN")
 # ⚡️ вставь сюда свой admin_id (узнаешь через /myid)
 ADMIN_ID = 123456789
 
-# ⚡️ вставь сюда свой токен
-TOKEN = "YOUR_BOT_TOKEN"
-
 feedbacks = []
 
 # Главное меню
